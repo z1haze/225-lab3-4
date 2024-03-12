@@ -2,11 +2,11 @@ pipeline {
     agent any 
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'roseaw-dockerhub'
-        DOCKER_IMAGE = 'cithit/roseaw'
+        DOCKER_CREDENTIALS_ID = 'roseaw-dockerhub'  
+        DOCKER_IMAGE = 'cithit/roseaw'                                     //<-----change this!
         IMAGE_TAG = "build-${BUILD_NUMBER}"
-        GITHUB_URL = 'https://github.com/miamioh-roseaw/roseaw.git'
-        KUBECONFIG = credentials('roseaw')
+        GITHUB_URL = 'https://github.com/miamioh-roseaw/roseaw.git'        //<-----change this!
+        KUBECONFIG = credentials('roseaw')                                 //<-----change this!
     }
 
     stages {
@@ -45,9 +45,9 @@ pipeline {
         stage('Deploy to Dev Environment') {
             steps {
                 script {
-                    // Set up Kubernetes configuration using the specified KUBECONFIG
+                    // This sets up the Kubernetes configuration using the specified KUBECONFIG
                     def kubeConfig = readFile(KUBECONFIG)
-                    // Update deployment-dev.yaml to use the new image tag
+                    // This updates the deployment-dev.yaml to use the new image tag
                     sh "sed -i 's|${DOCKER_IMAGE}:latest|${DOCKER_IMAGE}:${IMAGE_TAG}|' deployment-dev.yaml"
                     sh "kubectl apply -f deployment-dev.yaml"
                 }
@@ -60,10 +60,10 @@ pipeline {
         }
         stage ("Run Dastardly") {
             steps {
-                //cleanWs()
+                // ***************Change the IP in this section to your CLUSTER IP!********************
                 sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
-                    -e BURP_START_URL=http://10.48.10.181:32000/ \
+                    -e BURP_START_URL=http://10.48.10.174/ \
                     -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest
                 '''
