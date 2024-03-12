@@ -3,10 +3,10 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'roseaw-dockerhub'  
-        DOCKER_IMAGE = 'cithit/roseaw'                                     //<-----change this!
+        DOCKER_IMAGE = 'cithit/roseaw'                                      //<-----change this to your MiamiID!
         IMAGE_TAG = "build-${BUILD_NUMBER}"
-        GITHUB_URL = 'https://github.com/miamioh-roseaw/roseaw.git'        //<-----change this!
-        KUBECONFIG = credentials('roseaw')                                 //<-----change this!
+        GITHUB_URL = 'https://github.com/miamioh-cit/225-lab3-3.git'        //<-----change this to match this new repository!
+        KUBECONFIG = credentials('roseaw')                                  //<-----change this to match your kubernetes credentials (MiamiID-225)!  1 More change below!
     }
 
     stages {
