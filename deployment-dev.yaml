@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lab3-4dev-deployment
+  name: dev-deployment
 spec:
   replicas: 1  # Number of NGINX pods to run
   selector:
@@ -31,7 +31,7 @@ spec:
         pathType: ImplementationSpecific
         backend: 
           service:
-            name: lab3-4dev-service
+            name: dev-service
             port:
               number: 80
 ---
