@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: cithit/taylorw8:latest
+        image: cithit/roseaw:latest
         ports:
         - containerPort: 80  # Expose NGINX on port 80      
 ---
@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lab3-4dev-service
+  name: dev-service
 spec:
   ports:
   - protocol: TCP
